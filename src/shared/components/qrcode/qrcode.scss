@@ -1,0 +1,21 @@
+.qrcode-container {
+  display: flex;
+  position: relative;
+  padding: 10px;
+  border-radius: 5px;
+  border: 3px solid #fff;
+  
+  button {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    z-index: 3;
+
+    top: 50%;
+    right: 50%;
+  }
+
+  img {
+    width: 200px;
+  }
+}

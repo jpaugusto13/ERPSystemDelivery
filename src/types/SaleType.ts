@@ -1,7 +1,7 @@
 export type PagamentoType = {
-  type: string;
+  forma_pagamento: string;
   valor: number;
-}
+};
 
 export type SaleType = {
   id?: number;
@@ -10,5 +10,5 @@ export type SaleType = {
   data_venda?: Date | string;
   hora_venda?: string;
   id_produto_vendido?: number;
-  status_venda?: "concluída" | "cancelada" | "analise";
+  status_venda?: 'concluída' | 'cancelada' | 'analise';
 };

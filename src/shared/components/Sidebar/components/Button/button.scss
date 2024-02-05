@@ -4,14 +4,14 @@
   padding: 2px;
   border-radius: 1500px;
   cursor: pointer;
-  
+
   div {
     transform: scale(1);
     width: 32px;
     height: 2px;
     background-color: #ffffff;
     margin: 8px;
-    transition: .3s;
+    transition: 0.3s;
   }
 }
 .active {

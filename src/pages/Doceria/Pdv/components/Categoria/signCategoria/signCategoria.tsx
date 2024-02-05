@@ -1,10 +1,10 @@
 import * as yup from 'yup';
 
 import Input from '../../../../../../shared/components/Form/Input';
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
-import schema from "./schema";
+import schema from './schema';
 import api from '../../../../../../services/api';
 import Swal from 'sweetalert2';
 
@@ -20,31 +20,35 @@ function SignCategoria() {
   });
 
   const onSubmit = async (data: FormData) => {
-    console.log(data)
-    await api.post("/category/register", data)
-    .then(response => {
+    console.log(data);
+    await api
+      .post('/category/register', data)
+      .then((response) => {
         Swal.fire({
-          icon: "success",
-          text: response.data.message
-        })
-      }
-    )
-    .catch(() => {
-      Swal.fire({
-        icon: "error",
-        text: "Categoria já existente!"
+          icon: 'success',
+          text: response.data.message,
+        });
       })
-    })
-  }
+      .catch(() => {
+        Swal.fire({
+          icon: 'error',
+          text: 'Categoria já existente!',
+        });
+      });
+  };
   return (
     <div>
       <h1>Cadastrar categoria</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Input type='text' {...register("categoria")} error={errors?.categoria?.message} />
+        <Input
+          type="text"
+          {...register('categoria')}
+          error={errors?.categoria?.message}
+        />
         <button>Cadastrar</button>
       </form>
     </div>
-  )
+  );
 }
 
 export default SignCategoria;

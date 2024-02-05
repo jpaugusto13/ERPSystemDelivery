@@ -5,7 +5,7 @@ interface ProdutoType {
   preco: number;
   quantidade: number;
   imagem: string;
-  categoria: string
+  categoria: string;
 }
 
 export default ProdutoType;

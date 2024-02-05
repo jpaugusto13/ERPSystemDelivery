@@ -1,4 +1,10 @@
-import { createContext, useState, ReactNode, Dispatch, SetStateAction } from 'react';
+import {
+  createContext,
+  useState,
+  ReactNode,
+  Dispatch,
+  SetStateAction,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FormDataLogin } from '../pages/Auth/Login';
 
@@ -26,31 +32,32 @@ export function AuthProvider({ children }: AuthProviderProps) {
   // Função de SignIn de usuário
   const signIn = async (data: FormDataLogin) => {
     Swal.showLoading();
-    await api.post('user/login', data).then(({ data }) => { 
-      navigate('/doceria');
-      
-      Swal.fire({
-        title: 'Sucesso!',
-        text: 'Seja bem-vindo!',
-        icon: "success",
-        timer: 1500,
-      });
+    await api
+      .post('user/login', data)
+      .then(({ data }) => {
+        navigate('/doceria');
 
-      setIsLoggedIn(true);
-      localStorage.setItem(keyToken, data.token);
+        Swal.fire({
+          title: 'Sucesso!',
+          text: 'Seja bem-vindo!',
+          icon: 'success',
+          timer: 1500,
+        });
 
-    }).catch(({ response }) => {
-      const { data } = response;
+        setIsLoggedIn(true);
+        localStorage.setItem(keyToken, data.token);
+      })
+      .catch(({ response }) => {
+        const { data } = response;
         Swal.fire({
           title: 'Ops...',
           text: data.erro,
-          icon: "error",
+          icon: 'error',
           timer: 1500,
         });
-    });
+      });
   };
 
-  // Função de logout de usuário
   const logout = () => {
     localStorage.removeItem(keyToken);
     setIsLoggedIn(false);

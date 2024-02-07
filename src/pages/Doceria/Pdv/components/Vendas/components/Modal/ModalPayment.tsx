@@ -8,88 +8,15 @@ import {
   Button,
 } from '@nextui-org/react';
 import Input from '../../../../../../../shared/components/Form/Input';
-import { PagamentoType } from '../../../../../../../types/SaleType';
+import { PaymentType } from '../../../../../../../types/SaleType';
 
 interface ModalPaymentProps {
   openModal: boolean;
   onCloseModal: () => boolean;
 }
 
-interface FormaPagamento {
-  id: number;
-  valor: string;
-  tipo: string;
-}
-
 function ModalPayment({ openModal, onCloseModal }: ModalPaymentProps) {
-  const [formasPagamento, setFormasPagamento] = useState<FormaPagamento[]>([
-    { id: 1, valor: '', tipo: 'Pix' },
-  ]);
-
-  const adicionarFormaPagamento = () => {
-    if (formasPagamento.length < 4) {
-      const novaFormaPagamento = { id: Date.now(), valor: '', tipo: '' };
-      setFormasPagamento([...formasPagamento, novaFormaPagamento]);
-    }
-  };
-
-  const removerFormaPagamento = (id: number) => {
-    const formasAtualizadas = formasPagamento.filter(
-      (forma) => forma.id !== id,
-    );
-    setFormasPagamento(formasAtualizadas);
-  };
-
-  const formatarValor = (
-    id: number,
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    let valorNumerico = e.target.value.replace(/\D/g, '');
-    valorNumerico = (Number(valorNumerico) / 100).toLocaleString('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    });
-
-    const formasAtualizadas = formasPagamento.map((forma) =>
-      forma.id === id ? { ...forma, valor: valorNumerico } : forma,
-    );
-
-    setFormasPagamento(formasAtualizadas);
-  };
-
-  const handleChangeTipo = (id: number, tipo: string) => {
-    const formasAtualizadas = formasPagamento.map((forma) =>
-      forma.id === id ? { ...forma, tipo } : forma,
-    );
-
-    setFormasPagamento(formasAtualizadas);
-  };
-
-  const handleClickPreco = (
-    id: number,
-    e: React.MouseEvent<HTMLInputElement>,
-  ) => {
-    const input = e.target as HTMLInputElement;
-    input.setSelectionRange(input.value.length, input.value.length);
-    console.log(formasPagamento.find((forma) => forma.id === id)?.valor);
-  };
-
-  const confirmPagamento = () => {
-    let pagamentoArray: Array<PagamentoType> = [];
-
-    formasPagamento.forEach((pagamento) => {
-      const valorDePagamento = pagamento.valor.replace('R$', '');
-      const valorFormatado: string = valorDePagamento.replace(',', '.');
-
-      pagamentoArray.push({
-        forma_pagamento: pagamento.tipo.toLowerCase(),
-        valor: Number(Number(valorFormatado).toFixed(2)),
-      });
-    });
-
-    setPagamento(pagamentoArray);
-    onCloseModal(false);
-  };
+  const [ payment, setPayment ] = useState<PaymentType[]>([{ valor: 0, forma_pagamento: 'pix' }]);
 
   return (
     <Modal

@@ -13,13 +13,7 @@ function HeaderSidebar() {
           </div>
         </div>
         <div className="mt-20 text-center">
-          <h3 className="mb-1 text-xl font-bold leading-normal text-gray-700 dark:text-gray-300">
-            João Pedro
-          </h3>
           <div className="flex flex-row justify-center w-full mx-auto space-x-2 text-center">
-            <div className="text-base font-mono font-bold tracking-wide text-gray-600 dark:text-gray-300">
-              Doceria Tássia Augusto
-            </div>
           </div>
         </div>
       </div>

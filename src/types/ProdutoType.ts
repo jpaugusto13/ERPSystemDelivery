@@ -1,11 +1,11 @@
-interface ProdutoType {
+export default interface ProductType {
   id: number;
-  nome: string;
-  descricao: string;
+  nome?: string;
+  descricao?: string;
   preco: number;
   quantidade: number;
-  imagem: string;
-  categoria: string;
+  imagem?: string;
+  categoria?: string;
+  desconto: number;
 }
 
-export default ProdutoType;

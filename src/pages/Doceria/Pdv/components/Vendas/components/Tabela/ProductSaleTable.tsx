@@ -4,28 +4,34 @@ import {
   TableHead,
   TableRow,
 } from '../../../../../../../shared/components/Table/Table';
-import { useState } from 'react';
+import ProductType from '../../../../../../../types/ProdutoType';
 import ProdutoType from '../../../../../../../types/ProdutoType';
 import { NumericFormat } from 'react-number-format';
 
-function ProductSaleTable() {
-  const [produtos, setProdutos] = useState<Array<ProdutoType>>([]);
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
+type ProductSaleTableProps = {
+  products: ProductType[];
+}
+
+function ProductSaleTable({ products }: ProductSaleTableProps) {
   const uniqueProductIds = new Set();
 
   return (
     <div className="h-[21.3vw] overflow-x-hidden shadow-md">
       <Table>
         <TableRow>
-          <TableHead>#</TableHead>
-          <TableHead>Produto</TableHead>
-          <TableHead>Quantidade</TableHead>
-          <TableHead>Valor</TableHead>
+          <TableHead>Item</TableHead>
+          <TableHead>Preço</TableHead>
+          <TableHead>Qtd</TableHead>
+          <TableHead>Desc</TableHead>
+          <TableHead>Subtotal</TableHead>
+          <TableHead> </TableHead>
         </TableRow>
         <tbody className="overflow-y-scroll">
-          {produtos.length > 0 ? (
-            produtos.map(({ id, nome, preco }, index) => {
-              const arrayFilter: ProdutoType[] = produtos.filter(
+          {products.length > 0 ? (
+            products.map(({ id, nome, preco, desconto  }, index) => {
+              const arrayFilter: ProdutoType[] = products.filter(
                 (produto) => produto.id === id,
               );
               const arraySize = arrayFilter.length;
@@ -35,9 +41,23 @@ function ProductSaleTable() {
 
                 return (
                   <TableRow key={index}>
-                    <TableData>{index + 1}</TableData>
                     <TableData>{nome}</TableData>
-                    <TableData>{arraySize}x</TableData>
+                    <TableData>
+                      <NumericFormat
+                        value={preco}
+                        color="000"
+                        displayType={'text'}
+                        thousandSeparator={'.'}
+                        decimalSeparator={','}
+                        prefix={'R$ '}
+                        decimalScale={2}
+                        fixedDecimalScale={true}
+                      />
+                    </TableData>
+                    <TableData>
+                      {arraySize}x
+                    </TableData>
+                    <TableData><span className='flex rounded-lg p-1 bg-[#79E8BD]'>-{desconto.toString().replace(".00","")}%</span></TableData>
                     <TableData>
                       <NumericFormat
                         value={preco * arraySize}
@@ -49,6 +69,9 @@ function ProductSaleTable() {
                         decimalScale={2}
                         fixedDecimalScale={true}
                       />
+                    </TableData>
+                    <TableData>
+                      <button><DeleteOutlineIcon/></button>
                     </TableData>
                   </TableRow>
                 );

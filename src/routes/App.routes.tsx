@@ -8,9 +8,8 @@ import Dashboard from '../pages/Doceria/dashboard/Dashboard';
 
 import Inventario from '../pages/Doceria/Produtos/Inventario';
 import Pdv from '../pages/Doceria/Pdv/Pdv';
-import SignCategoria from '../pages/Doceria/Pdv/components/Categoria/signCategoria/signCategoria';
 import Funcionarios from '../pages/Doceria/Funcionarios/Funcionarios';
-import VendaPdv from '../pages/Doceria/Pdv/components/Vendas/VendaPdv';
+import Agendamentos from '../pages/Doceria/Agendamentos/Agendamentos';
 
 export const AppRoutes = () => {
   return (
@@ -22,13 +21,10 @@ export const AppRoutes = () => {
             <Route path="" element={<Dashboard />} />
 
             <Route path="catalago" element={<Inventario />} />
-
+            <Route path="agendamentos" element={<Agendamentos/>} />
             <Route path="funcionarios" element={<Funcionarios />} />
 
-            <Route path="ponto-de-venda" element={<Pdv />}>
-              <Route path="vendas" element={<VendaPdv />} />
-              <Route path="categorias" element={<SignCategoria />} />
-            </Route>
+            <Route path="ponto-de-venda" element={<Pdv />} />
           </Route>
         </Routes>
       </AuthProvider>

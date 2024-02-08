@@ -84,15 +84,9 @@ function SaleTable() {
           );
         })
       ) : (
-        <TableRow>
-          <TableData> </TableData>
-          <TableData> </TableData>
-          <TableData>
-            Nenhuma venda registrada no dia {`${day}/${month}/${year}`}
-          </TableData>
-          <TableData> </TableData>
-          <TableData> </TableData>
-        </TableRow>
+        <tr>
+          <th colSpan={5} className='p-7'>Nenhuma venda registrada no dia {`${day}/${month}/${year}`}</th>
+        </tr>
       )}
     </Table>
   );

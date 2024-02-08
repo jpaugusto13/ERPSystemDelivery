@@ -1,16 +1,19 @@
 @font-face {
-  font-family: "Poppins";
-  src: url("../../public/fonts/Poppins/Poppins-Regular.ttf")
+  font-family: "Lexend";
+  src: url("../../public/fonts/Lexend-Regular.ttf")
 }
 
 * {
   scrollbar-width: thin;
   scrollbar-color: #a4a4a4 #cacaca;
-  font-family: "Poppins";
-  letter-spacing: .05em;
-  font-size: 1em;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Lexend" , sans-serif;
+  font-size: 1.01em;
+  text-shadow: 0px 0px 1px #ffffff83;
+
+  text-rendering: optimizeLegibility;  /* não funciona no IE e Edge */
+  -webkit-font-smoothing: antialiased; /* apenas para Mac OS X/macOS */
+  -moz-osx-font-smoothing: grayscale; /* apenas para Mac OS X/macOS */
+  font-smooth: always; 
 }
 
 /* Works on Chrome, Edge, and Safari */

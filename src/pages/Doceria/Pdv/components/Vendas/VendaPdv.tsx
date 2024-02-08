@@ -34,7 +34,7 @@ function VendaPdv() {
     queryFn: getProducts,
   })
   useEffect(() => {
-    products && setAvailableProducts(products?.filter(({ quantidade }) => quantidade > 0 ))
+    products && setAvailableProducts(products?.filter(({ quantidade }) => quantidade >= 0 ))
   }, [ products ])
 
   useEffect(() => {
@@ -88,25 +88,10 @@ function VendaPdv() {
 
   return (
     <>
-      <ModalPayment
-        openModal={isModalPayment}
-        onCloseModal={setIsModalPayment}
-      />
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
-
-      <div className="grid grid-cols-2 w-full h-full overflow-hidden">
-       <div className="p-5 w-full h-full col-span-1 overflow-y-scroll bg-gray-100 mx-auto grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="flex w-full h-full">
+        <ToastContainer/>
+       
+       <div className="p-5 w-full h-full col-span-1 bg-gray-100 mx-auto grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {availableProducts?.map(({ id, nome, preco, descricao, imagem, quantidade, desconto }) => (
             <div className='h-full cursor-pointer' onClick={() => getProductById(id)}>
               <Product desconto={desconto} quantidade={quantidade} id={id} nome={nome} preco={preco} descricao={descricao} imagem={imagem} />
@@ -114,8 +99,8 @@ function VendaPdv() {
           ))}
         </div>
 
-        <div className="grid col-span-1">
-          <div className="col-span-2 overflow-y-hidden">
+        <div className="grid col-span-1 shadow-lg">
+          <div className="col-span-3 overflow-y-hidden">
             <ProductSaleTable products={productsSale} />
           </div>
 
@@ -140,35 +125,11 @@ function VendaPdv() {
             </h3>
           </div>
 
-          <div className="grid p-4 gap-2 rounded-sm grid-cols-2 col-span-2">
-            <ButtonPdv
-              onClick={() => handleCancel()}
-              className="bg-red-600"
-              icon={<DoNotDisturbIcon />}
-            >
-              Cancelar Venda
-            </ButtonPdv>
-            <ButtonPdv
-              onClick={() => null}
-              className="bg-yellow-600"
-              icon={<AlarmIcon />}
-            >
-              Agendar Venda
-            </ButtonPdv>
-            <ButtonPdv
-              onClick={() => null}
-              className="bg-blue-600"
-              icon={<PaymentIcon />}
-            >
-              Forma de pagamento
-            </ButtonPdv>
-            <ButtonPdv
-              onClick={() => null}
-              className="bg-green-600"
-              icon={<DoneIcon />}
-            >
-              Finalizar Venda
-            </ButtonPdv>
+          <div className="flex w-full justify-center items-center p-4 rounded-sm col-span-2">
+            
+            <button className='max-w-96  w-full p-4 rounded-xl shadow-xl text-white bg-[#56bf6c]'>
+              Concluir venda
+            </button>
           </div>
         </div>
       </div>
